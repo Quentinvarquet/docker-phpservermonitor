@@ -15,6 +15,7 @@ services:
      - 3306:3306
     networks:
      - network
+    restart: always
 
 networks:
   network:
