@@ -31,8 +31,6 @@ I will update the repository every time there is a new version of PHPServerMonit
 ### Supported tags and respective Dockerfile links
 
 
-
-
 #### Example
 
 ```bash
@@ -61,10 +59,18 @@ I created a docker-compose.yml with twi containers : PhpServerMonitor and MySQL
 
 #### Database configuration
 
-##### Networks
 
-* **Host:** mysql_container_name
-* **Port:** 3306
-* **Username:** root
-* **Password:** your_password
+If you used my docker-compose.yml file you have to : 
+
+1 - Go on phpmyadmin : http://ip_of_your_server:81  (If you don't want to use phpmyadmin for security reasons you can just delete the container in my docker-compose.yml file and create your database with the command line from the container MySQL.)
+2 - Create a database : monitor (you can use another name)
+3 - Go on PhpServerMonitor : http://ip_of_your_server
+
+![install](https://github.com/Quentinvarquet/docker-phpservermonitor/tree/master/img/install.php)
+
+* **Database Host:** mysql_container_name
+* **Database Name:** monitor
+* **Database User:** root
+* **Data Password:** your_password
+* **Table Previx:** psm_
 
