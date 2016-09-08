@@ -1,5 +1,5 @@
 
-# PHPsServerMonitor in Docker (Last version 3.1.1)
+# PHPServerMonitor in Docker (Last version 3.1.1)
 
 
 
@@ -37,6 +37,7 @@ I will update the repository every time there is a new version of PHPServerMonit
 docker run --name phpservermonitor -p 80:80 -d quentinv/phpservermonitor:latest
 ```
 
+
 * **latest** : Last version of PHPServerMonitor
 
 #### Tags
@@ -54,7 +55,7 @@ I created a docker-compose.yml with twi containers : PhpServerMonitor and MySQL
 #### Docker Compose files
 
 
-* [```latest```](https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/docker-compose/phpservermonitor-3.1.1/docker-compose.yml)
+[```latest```](https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/docker-compose/phpservermonitor-3.1.1/docker-compose.yml)
 
 
 #### Database configuration
