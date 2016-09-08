@@ -56,9 +56,6 @@ I created a docker-compose.yml with twi containers : PhpServerMonitor and MySQL
 #### Docker Compose files
 
 
-
-**Tomcat 7 with java 8**
-
 * [```latest```](https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/docker-compose/phpservermonitor-3.1.1/docker-compose.yml)
 
 
