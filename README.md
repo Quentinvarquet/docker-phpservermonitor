@@ -66,7 +66,7 @@ If you used my docker-compose.yml file you have to :
 2 - Create a database : monitor (you can use another name)
 3 - Go on PhpServerMonitor : http://ip_of_your_server
 
-![install](https://github.com/Quentinvarquet/docker-phpservermonitor/tree/master/img/install.png)
+![install](https://raw.githubusercontent.com/Quentinvarquet/docker-phpservermonitor/master/img/install.png)
 
 * **Database Host:** mysql_container_name
 * **Database Name:** monitor
