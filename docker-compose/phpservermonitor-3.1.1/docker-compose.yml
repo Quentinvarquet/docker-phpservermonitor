@@ -1,0 +1,21 @@
+version: '2'
+services:
+
+ php:
+  image: quentinv/phpservermonitor
+  restart: always
+  networks:
+   - network
+
+ mysql:
+    image: mysql:5.7
+    environment:
+     - MYSQL_ROOT_PASSWORD=your_password
+    ports:
+     - 3306:3306
+    networks:
+     - network
+
+networks:
+  network:
+   driver: bridge
