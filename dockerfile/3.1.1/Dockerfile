@@ -20,4 +20,8 @@ RUN set -x \
 	&& mv download phpmonitor.tar.gz \
 	&& tar -xvf phpmonitor.tar.gz --strip-components=1 \
 	&& cd phpservermon-3.1.1 \
-	&& mv * /var/www/html
+	&& mv * /var/www/html \ 
+	&& cd /var/www/html \
+	&& touch config.php \
+	&& chmod 0777 config.php
+	
