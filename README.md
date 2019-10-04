@@ -1,77 +1,90 @@
 
-# PHPServerMonitor in Docker (Last version 3.1.1)
+# PHPServerMonitor in Docker (Last version 3.3.2)
 
+**Notes:**
 
-
-### Last update : 08/09/2016 . Created repository with version 3.1.1
-#### Please open issues on [github](https://github.com/Quentinvarquet/docker-phpservermonitor/issues)
-
-
-### PHPServerMonitor
+* Last update : 04/10/2019, updated version to 3.3.2.
+* Please open issues on [github](https://github.com/Quentinvarquet/docker-phpservermonitor/issues).
+* Version 3.3.2 is the last release version of PHPServerMonitor that tested working with website check out-of-the-box. For details please see issues: [#664](https://github.com/phpservermon/phpservermon/issues/664), [#745](https://github.com/phpservermon/phpservermon/issues/745), [#756](https://github.com/phpservermon/phpservermon/issues/756). A possible workaround is to deploy the 3.3.2 first and then upgrade it to 3.4.5
+  
+## PHPServerMonitor
 
 [PHPServerMonitor](http://www.phpservermonitor.org/) is a script that checks whether your websites and servers are up and running. It comes with a web based user interface where you can manage your services and websites, and you can manage users for each server with a mobile number and email address.
 
-### Docker
+## Docker
 
 [Docker](https://www.docker.com/) allows you to package an application with all of its dependencies into a standardized unit for software development.
 
-More information : 
+More information :
 
 * [What is docker](https://www.docker.com/what-docker)
 * [How to Create a Docker Business Case](https://www.brianchristner.io/how-to-create-a-docker-business-case/)
 
-### Information
+## Information
 
 This is the unofficial (updated when I can !) repository for PHPServerMonitor
 
 I will update the repository every time there is a new version of PHPServerMonitor available
 
+## Supported tags and respective Dockerfile links
 
+* **[3.3.2, latest]((https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/dockerfile/Dockerfile))**
 
-### Supported tags and respective Dockerfile links
+## Build the image
 
-
-#### Example
+### Build the 3.3.2 version
 
 ```bash
-docker run --name phpservermonitor -p 80:80 -d quentinv/phpservermonitor:latest
+docker build --no-cache -t quentinv/phpservermonitor:latest \
+                        -t quentinv/phpservermonitor:3.3.2 \
+                        -f dockerfile/Dockerfile .
 ```
 
+### Build the 3.4.5 version
 
-* **latest** : Last version of PHPServerMonitor
+```bash
+docker build --no-cache --build-arg VERSION=3.4.5 \
+                        -t quentinv/phpservermonitor:latest \
+                        -t quentinv/phpservermonitor:3.3.2 \
+                        -f dockerfile/Dockerfile .
+```
 
-#### Tags
+## Run the image
 
-**For now, the only available tag is "latest"**
+To run this Docker image, the following configurations need to be set:
 
- [```latest```](https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/dockerfile/3.1.1/Dockerfile)
+* **DATABASE_HOST:** (optional) database host URI, i.e. mysql container name, default to `mysql`
+* **DATABASE_PORT:** (optional) database port, default to `3306`
+* **DATABASE_NAME:** (optional) database name, default to `psm`
+* **DATABASE_USER:** (optional) database user, default to `psm`
+* **DATABASE_PASSWORD:** database password, no default value
+* **DATABASE_PREFIX:** (optional) database table prefix, default to `psm_`
+* **BASE_URL:** base URL, no default value
+* **DEBUG:** (optional) debug mode, default to `false`
+* **CHECK_INTERVAL:** (optional) the inverval between each checks, default to `2` mins
+* **TIMEOUT:** (optional) timeout, default to `10` seconds
 
+### Example
+
+```bash
+docker run --name phpservermonitor -p 80:80 \
+                                   -e DATABASE_HOST=mysql \
+                                   -e DATABASE_PORT=3306 \
+                                   -e DATABASE_NAME=psm \
+                                   -e DATABASE_USER=psm \
+                                   -e DATABASE_PASSWORD=psm \
+                                   -e DATABASE_PREFIX=psm \
+                                   -e BASE_URL=http://localhost \
+                                   -e CHECK_INTERVAL=5 \
+                                   -e TIMEOUT=15 \
+                                   -e DEBUG=true \
+                                   -d quentinv/phpservermonitor:latest
+```
 
 ### Docker Compose
 
-I created a docker-compose.yml with twi containers : PhpServerMonitor and MySQL
+I created a [docker-compose.yml]((https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/docker-compose/docker-compose.yml)) with two containers : PhpServerMonitor and MySQL.
 
+### Using the PHP Server Monitor
 
-#### Docker Compose files
-
-
-[```latest```](https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/docker-compose/phpservermonitor-3.1.1/docker-compose.yml)
-
-
-#### Database configuration
-
-
-If you used my docker-compose.yml file you have to : 
-
-1 - Go on phpmyadmin : http://ip_of_your_server:81  (If you don't want to use phpmyadmin for security reasons you can just delete the container in my docker-compose.yml file and create your database with the command line from the container MySQL.)
-2 - Create a database : monitor (you can use another name)
-3 - Go on PhpServerMonitor : http://ip_of_your_server
-
-![install](https://raw.githubusercontent.com/Quentinvarquet/docker-phpservermonitor/master/img/install.png)
-
-* **Database Host:** mysql_container_name
-* **Database Name:** monitor
-* **Database User:** root
-* **Data Password:** your_password
-* **Table Previx:** psm_
-
+Just head to http://your_url_or_ip, complete the admin user setup and you are good to go.
