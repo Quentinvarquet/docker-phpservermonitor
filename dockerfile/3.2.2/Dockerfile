@@ -1,14 +1,13 @@
-FROM php:7.4-apache
+FROM php:7.3-apache
 
-ARG VERSION=3.5.0
+ARG VERSION=3.3.2
+ENV PHPMONITOR_URL https://github.com/phpservermon/phpservermon/archive/v$VERSION.tar.gz
 
 RUN apt-get update; \
     apt-get upgrade; \
     apt-get -qy install cron curl git wget; \
-	docker-php-ext-install pdo pdo_mysql sockets; \
+	docker-php-ext-install pdo pdo_mysql; \
 	apt-get clean && rm -rf /var/lib/apt/lists/*
-
-ENV PHPMONITOR_URL https://github.com/phpservermon/phpservermon/archive/v$VERSION.tar.gz
 
 RUN set -x; \
 	rm -rf /var/www/html/*; \

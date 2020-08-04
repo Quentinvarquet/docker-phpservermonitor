@@ -1,11 +1,11 @@
 
-# PHPServerMonitor in Docker (Last version 3.3.2)
+# PHPServerMonitor in Docker (Last version 3.5.0)
 
 **Notes:**
 
-* Last update : 04/10/2019, updated version to 3.3.2.
-* Please open issues on [github](https://github.com/Quentinvarquet/docker-phpservermonitor/issues).
-* Version 3.3.2 is the last release version of PHPServerMonitor that tested working with website check out-of-the-box. For details please see issues: [#664](https://github.com/phpservermon/phpservermon/issues/664), [#745](https://github.com/phpservermon/phpservermon/issues/745), [#756](https://github.com/phpservermon/phpservermon/issues/756). A possible workaround is to deploy the 3.3.2 first and then upgrade it to 3.4.5
+* Last update : 04/08/2020, updated version to 3.5.0.
+* Forked from [Quentinvarquet](https://github.com/Quentinvarquet/docker-phpservermonitor).
+* Please open issues on [github](https://github.com/alwynpan/docker-phpservermonitor/issues).
   
 ## PHPServerMonitor
 
@@ -22,31 +22,18 @@ More information :
 
 ## Information
 
-This is the unofficial (updated when I can !) repository for PHPServerMonitor
+This is the unofficial (updated when I can!) repository for PHPServerMonitor
 
 I will update the repository every time there is a new version of PHPServerMonitor available
 
-## Supported tags and respective Dockerfile links
-
-* **[3.3.2, latest]((https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/dockerfile/Dockerfile))**
-
 ## Build the image
 
-### Build the 3.3.2 version
+### Build the 3.5.0 version
 
 ```bash
-docker build --no-cache -t quentinv/phpservermonitor:latest \
-                        -t quentinv/phpservermonitor:3.3.2 \
-                        -f dockerfile/latest/Dockerfile .
-```
-
-### Build the 3.4.5 version
-
-```bash
-docker build --no-cache --build-arg VERSION=3.4.5 \
-                        -t quentinv/phpservermonitor:latest \
-                        -t quentinv/phpservermonitor:3.3.2 \
-                        -f dockerfile/latest/Dockerfile .
+docker build --no-cache -t alwynpan/phpservermonitor:latest \
+                        -t alwynpan/phpservermonitor:3.5.0 \
+                        -f dockerfile/Dockerfile .
 ```
 
 ## Run the image
@@ -83,7 +70,43 @@ docker run --name phpservermonitor -p 80:80 \
 
 ### Docker Compose
 
-I created a [docker-compose.yml]((https://github.com/Quentinvarquet/docker-phpservermonitor/blob/master/docker-compose/docker-compose.yml)) with two containers : PhpServerMonitor and MySQL.
+```bash
+version: '3.8'
+services:
+ psm:
+   image: alwynpan/phpservermonitor:3.5.0
+   restart: always
+   ports:
+     - 80:80
+   depends_on:
+     - mysql
+   environment:
+     - DATABASE_HOST=mysql
+     - DATABASE_PORT=3306
+     - DATABASE_NAME=psm
+     - DATABASE_USER=psm
+     - DATABASE_PASSWORD=psm
+     - DATABASE_PREFIX=psm
+     - BASE_URL=http://localhost
+     - CHECK_INTERVAL=1
+     - TIMEOUT=15
+     - DEBUG=true
+   container_name: psm
+
+ mysql:
+   image: mysql:5.7
+   restart: always
+   ports:
+     - 3306:3306
+   environment:
+     - MYSQL_ROOT_PASSWORD=top_secret
+     - MYSQL_DATABASE=psm
+     - MYSQL_USER=psm
+     - MYSQL_PASSWORD=psm
+   volumes:
+     - ./data/:/var/lib/mysql
+   container_name: mysql
+```
 
 ### Using the PHP Server Monitor
 
