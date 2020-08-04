@@ -19,7 +19,7 @@ RUN set -x; \
 	cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini; \
 	sed -i 's/;date.timezone =/date.timezone = UTC/' /usr/local/etc/php/php.ini
 
-COPY ["dockerfile/entrypoint.sh", "/"]
+COPY ["dockerfile/latest/entrypoint.sh", "/"]
 
 RUN chmod +x /entrypoint.sh
 

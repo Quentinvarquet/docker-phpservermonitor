@@ -37,7 +37,7 @@ I will update the repository every time there is a new version of PHPServerMonit
 ```bash
 docker build --no-cache -t quentinv/phpservermonitor:latest \
                         -t quentinv/phpservermonitor:3.3.2 \
-                        -f dockerfile/Dockerfile .
+                        -f dockerfile/latest/Dockerfile .
 ```
 
 ### Build the 3.4.5 version
@@ -46,7 +46,7 @@ docker build --no-cache -t quentinv/phpservermonitor:latest \
 docker build --no-cache --build-arg VERSION=3.4.5 \
                         -t quentinv/phpservermonitor:latest \
                         -t quentinv/phpservermonitor:3.3.2 \
-                        -f dockerfile/Dockerfile .
+                        -f dockerfile/latest/Dockerfile .
 ```
 
 ## Run the image
