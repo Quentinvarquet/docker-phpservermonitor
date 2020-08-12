@@ -1,9 +1,9 @@
 
-# PHPServerMonitor in Docker (Last version 3.5.0)
+# PHPServerMonitor in Docker (Last version 3.5.1)
 
 **Notes:**
 
-* Last update : 04/08/2020, updated version to 3.5.0.
+* Last update : 04/08/2020, updated version to 3.5.1.
 * Forked from [Quentinvarquet](https://github.com/Quentinvarquet/docker-phpservermonitor).
 * Please open issues on [github](https://github.com/alwynpan/docker-phpservermonitor/issues).
   
@@ -28,11 +28,11 @@ I will update the repository every time there is a new version of PHPServerMonit
 
 ## Build the image
 
-### Build the 3.5.0 version
+### Build the 3.5.1 version
 
 ```bash
 docker build --no-cache -t alwynpan/phpservermonitor:latest \
-                        -t alwynpan/phpservermonitor:3.5.0 \
+                        -t alwynpan/phpservermonitor:3.5.1 \
                         -f dockerfile/Dockerfile .
 ```
 
@@ -74,7 +74,7 @@ docker run --name phpservermonitor -p 80:80 \
 version: '3.8'
 services:
  psm:
-   image: alwynpan/phpservermonitor:3.5.0
+   image: alwynpan/phpservermonitor:3.5.1
    restart: always
    ports:
      - 80:80
